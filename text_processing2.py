@@ -76,16 +76,19 @@ def to_camel_case(underscore_str):
     """
 
     underscore_str_splited = underscore_str.split('_')
-    temp_camelcase_str = underscore_str_splited[0][:]
-    for string in underscore_str_splited[1:]:
-        if string != '':
-            temp_camelcase_str += string.title()
+    if len(underscore_str_splited) == 1:        # already camelcase_str or null string
+        camelcase_str = underscore_str
+    else:                                       # is underscore_str
+        temp_camelcase_str = underscore_str_splited[0][:].lower()
 
-    if temp_camelcase_str:
-        camelcase_str = temp_camelcase_str[0].lower() + temp_camelcase_str[1:]
-    else:
-        camelcase_str = ''
+        for string in underscore_str_splited[1:]:
+            if string != '':
+                temp_camelcase_str += string.title()
 
+        if temp_camelcase_str:
+            camelcase_str = temp_camelcase_str[0].lower() + temp_camelcase_str[1:]
+        else:   # only underscore
+            camelcase_str = ''
     return camelcase_str
 
     """
