@@ -28,7 +28,17 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+
+    digit_string = ''
+    digit = {'0': 'zero', '1': 'one', '2':'two', 
+            '3':'three', '4':'four', '5':'five', '6':'six', 
+            '7': 'seven', '8': 'eight', '9': 'nine'}
+    
+    for string in input_string:
+        if string in digit:
+            digit_string += digit[string] + ' '
+
+    digit_string = digit_string[:-1]
     return digit_string
 
 
@@ -64,5 +74,43 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+
+    underscore_str_splited = underscore_str.split('_')
+    if len(underscore_str_splited) == 1:        # already camelcase_str or null string
+        camelcase_str = underscore_str
+    else:                                       # is underscore_str
+        temp_camelcase_str = underscore_str_splited[0][:].lower()
+
+        for string in underscore_str_splited[1:]:
+            if string != '':
+                temp_camelcase_str += string.title()
+
+        if temp_camelcase_str:
+            camelcase_str = temp_camelcase_str[0].lower() + temp_camelcase_str[1:]
+        else:   # only underscore
+            camelcase_str = ''
     return camelcase_str
+
+    """
+    if '_' not in underscore_str:
+        return underscore_str
+
+    camelcase_str = ''
+    isfirst = True
+    pre_is_underscore = False
+    for string in underscore_str:
+        if string == '_':
+            pre_is_underscore = True
+
+        else:            
+            if isfirst == False and pre_is_underscore == True:
+                camelcase_str += string.upper()
+            else:
+                camelcase_str += string.lower()
+            pre_is_underscore = False
+            isfirst = False
+
+    return camelcase_str
+    """
+
+    
